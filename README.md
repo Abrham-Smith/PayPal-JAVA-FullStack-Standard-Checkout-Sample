@@ -73,35 +73,35 @@ Endpoint: `/api/orders`
 @RequestMapping(value="/api/orders", method = RequestMethod.POST)
 @CrossOrigin
 public Object createOrder() {
-        String accessToken = generateAccessToken();
-        RestTemplate restTemplate = new RestTemplate();
+  String accessToken = generateAccessToken();
+  RestTemplate restTemplate = new RestTemplate();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + accessToken);
-        headers.add("Content-Type", "application/json");
-        headers.add("Accept", "application/json");
-        headers.setContentType(MediaType.APPLICATION_JSON);
+  HttpHeaders headers = new HttpHeaders();
+  headers.set("Authorization", "Bearer " + accessToken);
+  headers.add("Content-Type", "application/json");
+  headers.add("Accept", "application/json");
+  headers.setContentType(MediaType.APPLICATION_JSON);
 
-        //JSON String
-        String requestJson = "{\"intent\":\"CAPTURE\",\"purchase_units\":[{\"amount\":{\"currency_code\":\"USD\",\"value\":\"100.00\"}}]}";
-        HttpEntity<String> entity = new HttpEntity<String>(requestJson, headers);
+  //JSON String
+  String requestJson = "{\"intent\":\"CAPTURE\",\"purchase_units\":[{\"amount\":{\"currency_code\":\"USD\",\"value\":\"100.00\"}}]}";
+  HttpEntity<String> entity = new HttpEntity<String>(requestJson, headers);
 
-        ResponseEntity<Object> response = restTemplate.exchange(
-                BASE + "/v2/checkout/orders",
-                HttpMethod.POST,
-                entity,
-                Object.class
-        );
+  ResponseEntity<Object> response = restTemplate.exchange(
+          BASE + "/v2/checkout/orders",
+          HttpMethod.POST,
+          entity,
+          Object.class
+  );
 
-        if (response.getStatusCode() == HttpStatus.CREATED) {
-            LOGGER.log(Level.INFO, "ORDER CAPTURE");
-            return response.getBody();
-        } else {
-            LOGGER.log(Level.INFO, "FAILED CAPTURING ORDER");
-            return "Unavailable to get CAPTURE ORDER, STATUS CODE " + response.getStatusCode();
-        }
+  if (response.getStatusCode() == HttpStatus.CREATED) {
+      LOGGER.log(Level.INFO, "ORDER CAPTURE");
+      return response.getBody();
+  } else {
+      LOGGER.log(Level.INFO, "FAILED CAPTURING ORDER");
+      return "Unavailable to get CAPTURE ORDER, STATUS CODE " + response.getStatusCode();
+  }
 
-    }
+  }
 ```
 
 ### Capture Payment
@@ -111,34 +111,34 @@ Endpoint: `/api/orders/:orderID/capture`
 
 ```java
 @RequestMapping(value="/api/orders/{orderId}/capture", method = RequestMethod.POST)
-    @CrossOrigin
-    public Object capturePayment(@PathVariable("orderId") String orderId) {
-        String accessToken = generateAccessToken();
-        HttpHeaders headers = new HttpHeaders();
-        RestTemplate restTemplate = new RestTemplate();
+@CrossOrigin
+public Object capturePayment(@PathVariable("orderId") String orderId) {
+  String accessToken = generateAccessToken();
+  HttpHeaders headers = new HttpHeaders();
+  RestTemplate restTemplate = new RestTemplate();
 
-        headers.set("Authorization", "Bearer " + accessToken);
-        headers.add("Content-Type", "application/json");
-        headers.add("Accept", "application/json");
-        headers.setContentType(MediaType.APPLICATION_JSON);
+  headers.set("Authorization", "Bearer " + accessToken);
+  headers.add("Content-Type", "application/json");
+  headers.add("Accept", "application/json");
+  headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+  HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
-        ResponseEntity<Object> response = restTemplate.exchange(
-                BASE + "/v2/checkout/orders/" + orderId + "/capture",
-                HttpMethod.POST,
-                entity,
-                Object.class
-        );
+  ResponseEntity<Object> response = restTemplate.exchange(
+          BASE + "/v2/checkout/orders/" + orderId + "/capture",
+          HttpMethod.POST,
+          entity,
+          Object.class
+  );
 
-        if (response.getStatusCode() == HttpStatus.CREATED) {
-            LOGGER.log(Level.INFO, "ORDER CREATED");
-            return response.getBody();
-        } else {
-            LOGGER.log(Level.INFO, "FAILED CREATING ORDER");
-            return "Unavailable to get CREATE AN ORDER, STATUS CODE " + response.getStatusCode();
-        }
-    }
+  if (response.getStatusCode() == HttpStatus.CREATED) {
+      LOGGER.log(Level.INFO, "ORDER CREATED");
+      return response.getBody();
+  } else {
+      LOGGER.log(Level.INFO, "FAILED CREATING ORDER");
+      return "Unavailable to get CREATE AN ORDER, STATUS CODE " + response.getStatusCode();
+  }
+}
 ```
 
 ### Run this App
