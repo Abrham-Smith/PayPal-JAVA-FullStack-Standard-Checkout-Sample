@@ -150,6 +150,8 @@ CLIENT_ID=
 APP_SECRET=
 ```
 
+> You will need the CLIENT_ID in your index.html too.
+
 Complete the steps in [Get started](https://developer.paypal.com/api/rest/) to get the following sandbox account information from the Developer Dashboard:
 - Sandbox client ID and the secret of [a REST app](https://www.paypal.com/signin?returnUri=https%3A%2F%2Fdeveloper.paypal.com%2Fdeveloper%2Fapplications&_ga=1.252581760.841672670.1664266268).
 - Access token to use the PayPal REST API server.
@@ -164,6 +166,8 @@ Now, run the following command in your terminal to start the server:
 `./mvnw spring-boot:run `
 
 and open then `http://localhost:8080/index.html` in your browser.
+
+> Make sure you have entered in the index.html your CLIEN_ID key.
 
 ## PayPal Developer Community
 The PayPal Developer community helps you build your career while improving your products and the developer experience. You’ll be able to contribute code and documentation, meet new people and learn from the open-source community.
