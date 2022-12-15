@@ -28,7 +28,7 @@ The `createOrder()` callback allows you to create the request of your order with
 
 ```javascript
     createOrder: function (data, actions) {
-      return fetch("/api/orders", {
+      return fetch("http://localhost:8080/api/orders", {
         method: "post",
       })
         .then((response) => response.json())
@@ -41,7 +41,7 @@ The `onApprove()` allows doing something with the order details after the order 
 
 ```javascript
 onApprove: function (data, actions) {
-      return fetch(`/api/orders/${data.orderID}/capture`, {
+      return fetch(`http://localhost:8080/api/orders/${data.orderID}/capture`, {
         method: "post",
       })
         .then((response) => response.json())
