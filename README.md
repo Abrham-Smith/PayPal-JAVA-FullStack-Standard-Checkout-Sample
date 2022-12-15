@@ -163,7 +163,7 @@ Now, run the following command in your terminal to start the server:
 
 `./mvnw spring-boot:run `
 
-and open the `http://localhost:8080/index.html` in your browswer.
+and open then `http://localhost:8080/index.html` in your browser.
 
 ## PayPal Developer Community
 The PayPal Developer community helps you build your career while improving your products and the developer experience. You’ll be able to contribute code and documentation, meet new people and learn from the open-source community.
